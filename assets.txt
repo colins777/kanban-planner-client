@@ -1,0 +1,23 @@
+Time - https://youtu.be/-7K_0NRLCu4?t=3168
+
+
+
+Libs
+1.Nest.js for server
+
+Start server - npm start dev
+
+Npm packages:
+- @nestjs/passport - encode passwords
+- npm i argon2 - npm i
+- npm i class-transformer - for send objects on server
+- npm i class-validator - fields validation by server
+- npm i cookie-parser
+- npm i date-fns - for work with dates
+- npm i passport
+- npm i passport-jwt
+- npm i -g prisma - for Databases
+prisma init  - for init prisma
+
+Install PostgreSQL on Windows 10
+https://www.youtube.com/watch?v=0n41UTkOBb0
