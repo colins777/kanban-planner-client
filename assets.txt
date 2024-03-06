@@ -21,3 +21,6 @@ prisma init  - for init prisma
 
 Install PostgreSQL on Windows 10
 https://www.youtube.com/watch?v=0n41UTkOBb0
+
+Prisma commands
+update DB columns (rewrite all atables data) - prisma db push
