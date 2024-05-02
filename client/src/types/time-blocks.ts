@@ -13,5 +13,5 @@ export interface ITimeBlockResponse extends IBase{
 }
 
 export type TypeTimeBlockFormState = Partial<
-    Omit<ITimeBlockResponse, 'createdAt' | 'updatedAt'>
-    >
+                                        Omit<ITimeBlockResponse, 'createdAt' | 'updatedAt'>
+                                        >
