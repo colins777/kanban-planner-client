@@ -52,3 +52,5 @@ class TimerService {
     }
 
 }
+
+export const timerService = new TimerService()

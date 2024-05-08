@@ -11,7 +11,7 @@ export const authService = {
 
         if (response.data.accessToken) saveTokenStorage(response.data.accessToken)
 
-        return response;
+        return response
     },
 
     //update token
@@ -32,7 +32,7 @@ export const authService = {
             removeFromStorage()
         }
 
-        return response;
+        return response
     }
 }
 
