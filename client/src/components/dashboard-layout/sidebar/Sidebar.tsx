@@ -22,11 +22,8 @@ export function Sidebar() {
 						color={COLORS.primary}
 						size={38}
 					/>
-					<span className='text-2xl font-bold relative'>
+					<span className='text-1xl font-bold relative'>
 						Time Planner
-						<span className='absolute -top-1 -right-6 text-xs opacity-40 rotate-[18deg] font-normal'>
-							beta
-						</span>
 					</span>
 				</Link>
 				<div className='p-3 relative'>
