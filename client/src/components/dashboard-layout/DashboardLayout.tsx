@@ -1,3 +1,7 @@
+//@TODO state managment Next.js
+//https://blog.logrocket.com/guide-state-management-next-js/
+
+
 //@TODO 1 add timer to each task for tracking time
 //@TODO 2 use pomodoro lap duration while tracking time is running
 //@TODO 3 set on/of for using pomodoro lap in tasks
