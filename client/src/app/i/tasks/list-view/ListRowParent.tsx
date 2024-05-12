@@ -35,6 +35,7 @@ export function ListRowParent({
 					</div>
 
 					{filterTasks(items, value)?.map((item, index) => (
+						//Element that will be draggable
 						<Draggable
 							key={item.id}
 							draggableId={item.id}

@@ -1,3 +1,7 @@
+//for auto save task changes on server
+//if task id exist - task will be updated
+//if task id does't exist - task will be updated
+
 import debounce from 'lodash.debounce'
 import { useCallback, useEffect } from 'react'
 import { UseFormWatch } from 'react-hook-form'
@@ -19,11 +23,11 @@ export function useTaskDebounce({ watch, itemId }: IUseTaskDebounce) {
 	const debouncedCreateTask = useCallback(
 		debounce((formData: TypeTaskFormState) => {
 			createTask(formData)
-		}, 444),
+		}, 500),
 		[]
 	)
 
-	// now debouncedUpdateTask will be saved among renders, and debounce will be work normally
+	// now debounce UpdateTask will be saved among renders, and debounce will be work normally
 	const debouncedUpdateTask = useCallback(
 		debounce((formData: TypeTaskFormState) => {
 			updateTask({ id: itemId, data: formData })
@@ -31,6 +35,7 @@ export function useTaskDebounce({ watch, itemId }: IUseTaskDebounce) {
 		[]
 	)
 
+	//listen form changes
 	useEffect(() => {
 		const { unsubscribe } = watch(formData => {
 			if (itemId) {
@@ -43,6 +48,7 @@ export function useTaskDebounce({ watch, itemId }: IUseTaskDebounce) {
 			}
 		})
 
+		//performance optimization
 		return () => {
 			unsubscribe()
 		}

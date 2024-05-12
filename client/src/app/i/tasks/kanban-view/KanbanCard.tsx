@@ -13,14 +13,14 @@ import type { ITaskResponse, TypeTaskFormState } from '@/types/task.types'
 import { useDeleteTask } from '../hooks/useDeleteTask'
 import { useTaskDebounce } from '../hooks/useTaskDebounce'
 
-import styles from './ListView.module.scss'
+import styles from './KanbanView.module.scss'
 
-interface IListRow {
+interface IKanbanCard {
 	item: ITaskResponse
 	setItems: Dispatch<SetStateAction<ITaskResponse[] | undefined>>
 }
 
-export function ListRow({ item, setItems }: IListRow) {
+export function KanbanCard({ item, setItems }: IKanbanCard) {
 	const { register, control, watch } = useForm<TypeTaskFormState>({
 		defaultValues: {
 			name: item.name,
@@ -37,32 +37,33 @@ export function ListRow({ item, setItems }: IListRow) {
 	return (
 		<div
 			className={cn(
-				styles.row,
-				watch('isCompleted') ? styles.completed : '',
+				styles.card,
+				{
+					[styles.completed]: watch('isCompleted')
+				},
 				'animation-opacity'
 			)}
 		>
-			<div>
-				<span className='inline-flex items-center gap-2.5 w-full'>
-					<button aria-describedby='todo-item'>
-						<GripVertical className={styles.grip} />
-					</button>
+			<div className={styles.cardHeader}>
+				<button aria-describedby='todo-item'>
+					<GripVertical className={styles.grip} />
+				</button>
 
-					<Controller
-						control={control}
-						name='isCompleted'
-						render={({ field: { value, onChange } }) => (
-							<Checkbox
-								onChange={onChange}
-								checked={value}
-							/>
-						)}
-					/>
+				<Controller
+					control={control}
+					name='isCompleted'
+					render={({ field: { value, onChange } }) => (
+						<Checkbox
+							onChange={onChange}
+							checked={value}
+						/>
+					)}
+				/>
 
-					<TransparentField {...register('name')} />
-				</span>
+				<TransparentField {...register('name')} />
 			</div>
-			<div>
+
+			<div className={styles.cardBody}>
 				<Controller
 					control={control}
 					name='createdAt'
@@ -70,17 +71,16 @@ export function ListRow({ item, setItems }: IListRow) {
 						<DatePicker
 							onChange={onChange}
 							value={value || ''}
+							position='left'
 						/>
 					)}
 				/>
-			</div>
-			<div className='capitalize'>
+
 				<Controller
 					control={control}
 					name='priority'
 					render={({ field: { value, onChange } }) => (
 						<SingleSelect
-							//this should to get from backend
 							data={['high', 'medium', 'low'].map(item => ({
 								value: item,
 								label: item
@@ -91,7 +91,8 @@ export function ListRow({ item, setItems }: IListRow) {
 					)}
 				/>
 			</div>
-			<div>
+
+			<div className={styles.cardActions}>
 				<button
 					onClick={() =>
 						item.id ? deleteTask(item.id) : setItems(prev => prev?.slice(0, -1))
