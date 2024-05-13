@@ -1,4 +1,4 @@
-import {ITimeBlockResponse} from "./time-blocks";
+import {ITimeBlockResponse} from "./time-block.types";
 import {IBase} from "./root.types";
 
 export interface ITimerRoundResponse extends IBase {
