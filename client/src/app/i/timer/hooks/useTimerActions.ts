@@ -15,10 +15,11 @@ export function useTimerActions({
 	rounds,
 	setActiveRound
 }: TypeUseTimerActions) {
+
 	const { workInterval } = useLoadSettings()
 	const { isUpdateRoundPending, updateRound } = useUpdateRound()
 
-	//save timer data in DB after clicked on pasue btn
+	//save timer data in DB after clicked on pause btn
 	const pauseHandler = () => {
 		setIsRunning(false)
 		if (!activeRound?.id) return

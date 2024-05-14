@@ -6,6 +6,9 @@ import type { ITimerState } from '../timer.types'
 
 import { useLoadSettings } from './useLoadSettings'
 
+//import { useTimerActions } from '../hooks/useTimerActions'
+//import {useTodaySession} from "./useTodaySession";
+
 export function useTimer(): ITimerState {
 	const { breakInterval, workInterval } = useLoadSettings()
 
@@ -23,9 +26,39 @@ export function useTimer(): ITimerState {
 			interval = setInterval(() => {
 				setSecondsLeft(secondsLeft => secondsLeft - 1)
 			}, 1000)
+
 		} else if (!isRunning && secondsLeft !== 0 && interval) {
 			clearInterval(interval)
 		}
+
+		if (secondsLeft == 0) {
+			console.log('Round completed!!!')
+
+			//stop timer after round is ended
+			setIsRunning(false)
+
+			//set current round to completed
+			// const timerState = useTimer()
+			// const { isLoading, sessionsResponse, workInterval } =
+			// 	useTodaySession(timerState)
+			//
+			// const rounds = sessionsResponse?.data.rounds
+			// const actions = useTimerActions({ ...timerState, rounds })
+			// actions.nextRoundHandler()
+
+			//show notification if round is ended
+			if (Notification.permission === "granted") {
+				new Notification("Round completed!!!")
+			} else if (Notification.permission !== "denied") {
+				Notification.requestPermission().then(permission => {
+					if (permission === "granted") {
+						new Notification("Time to break!")
+					}
+				})
+			}
+		}
+
+
 
 		return () => {
 			if (interval) clearInterval(interval)
