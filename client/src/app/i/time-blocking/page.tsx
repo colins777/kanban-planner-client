@@ -7,14 +7,14 @@ import { NO_INDEX_PAGE } from '@/constants/seo.constants'
 import { TimeBlocking } from './TimeBlocking'
 
 export const metadata: Metadata = {
-	title: 'Time blocking',
+	title: 'Time planning',
 	...NO_INDEX_PAGE
 }
 
 export default function TimeBlockingPage() {
 	return (
 		<div>
-			<Heading title='Time blocking' />
+			<Heading title='Time planning' />
 			<TimeBlocking />
 		</div>
 	)

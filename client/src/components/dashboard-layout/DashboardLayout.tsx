@@ -8,6 +8,9 @@
 //@TODO 4 add ring sound after pomodoro timer end
 //@TODO 5 add push notification after pomodoro timer end
 //@TODO 6 separate Settings blocks
+//@TODO 7 set active menu
+//@TODO 8 fix sorting in Time planning page
+
 
 import type { PropsWithChildren } from 'react'
 
