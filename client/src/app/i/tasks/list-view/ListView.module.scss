@@ -2,7 +2,8 @@
 	@apply w-full;
 
 	.header {
-		@apply grid grid-cols-[1.4fr_.4fr_.4fr_.1fr];
+		//@apply grid grid-cols-[1.4fr_.4fr_.4fr_.1fr];
+		@apply grid grid-cols-[1.4fr_.4fr_.4fr_.1fr_.1fr_.1fr];
 	}
 
 	.header,
@@ -34,7 +35,8 @@
 		}
 
 		.row {
-			@apply font-normal grid grid-cols-[1.4fr_.4fr_.4fr_.1fr] relative;
+			//@apply font-normal grid grid-cols-[1.4fr_.4fr_.4fr_.1fr] relative;
+			@apply font-normal grid grid-cols-[1.4fr_.4fr_.4fr_.1fr_.1fr_.1fr] relative;
 
 			&.completed {
 				> div > span > input {

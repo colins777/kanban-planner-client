@@ -20,6 +20,8 @@ export function Timer() {
 	const rounds = sessionsResponse?.data.rounds
 	const actions = useTimerActions({ ...timerState, rounds })
 
+	console.log('Timer actions', actions)
+
 	const { isPending, mutate } = useCreateSession()
 	const { deleteSession, isDeletePending } = useDeleteSession(() =>
 		timerState.setSecondsLeft(workInterval * 60)
@@ -45,7 +47,7 @@ export function Timer() {
 					<button
 						className='mt-6 opacity-80 hover:opacity-100 transition-opacity'
 						onClick={
-							timerState.isRunning ? actions.pauseHandler : actions.playHandler
+							timerState.isRunning ? actions.pauseHandler : actions.runTimerHandler
 						}
 						disabled={actions.isUpdateRoundPending}
 					>

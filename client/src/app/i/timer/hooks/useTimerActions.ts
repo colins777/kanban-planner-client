@@ -33,7 +33,7 @@ export function useTimerActions({
 		})
 	}
 
-	const playHandler = () => {
+	const runTimerHandler = () => {
 		setIsRunning(true)
 	}
 
@@ -68,7 +68,7 @@ export function useTimerActions({
 	return {
 		isUpdateRoundPending,
 		pauseHandler,
-		playHandler,
+		runTimerHandler,
 		nextRoundHandler,
 		prevRoundHandler
 	}

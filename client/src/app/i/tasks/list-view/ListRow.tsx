@@ -1,5 +1,5 @@
 import cn from 'clsx'
-import { GripVertical, Loader, Trash } from 'lucide-react'
+import {GripVertical, Loader, Pause, Play, Trash} from 'lucide-react'
 import type { Dispatch, SetStateAction } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 
@@ -62,6 +62,7 @@ export function ListRow({ item, setItems }: IListRow) {
 					<TransparentField {...register('name')} />
 				</span>
 			</div>
+
 			<div>
 				<Controller
 					control={control}
@@ -91,6 +92,20 @@ export function ListRow({ item, setItems }: IListRow) {
 					)}
 				/>
 			</div>
+
+			{/*start tracking time btn*/}
+			<div className='capitalize'>
+				<button
+					className='mt-2 opacity-80 hover:opacity-100 transition-opacity'
+				>
+					{/*{timerState.isRunning ? <Pause size={30} /> : <Play size={30} />}*/}
+					<Play size={20} />
+				</button>
+			</div>
+
+
+			<div className='capitalize'>1.6 H</div>
+
 			<div>
 				<button
 					onClick={() =>

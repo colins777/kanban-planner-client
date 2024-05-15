@@ -1,9 +1,8 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-
 import { TypeTimerRoundState } from '@/types/timer.types'
-
 import { timerService } from '@/services/timer.service'
 
+//For updating round data
 export function useUpdateRound() {
 	const queryClient = useQueryClient()
 

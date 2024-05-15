@@ -1,26 +1,26 @@
 import { useEffect, useState } from 'react'
 
 import type { ITimerRoundResponse } from '@/types/timer.types'
-
 import type { ITimerState } from '../timer.types'
 
 import { useLoadSettings } from './useLoadSettings'
-
-//import { useTimerActions } from '../hooks/useTimerActions'
-//import {useTodaySession} from "./useTodaySession";
+import {useUpdateRound} from "./useUpdateRound";
 
 export function useTimer(): ITimerState {
 	const { breakInterval, workInterval } = useLoadSettings()
 
 	const [isRunning, setIsRunning] = useState(false)
 	const [isBreakTime, setIsBreakTime] = useState(false)
-
 	const [secondsLeft, setSecondsLeft] = useState(workInterval * 60)
 	const [activeRound, setActiveRound] = useState<ITimerRoundResponse>()
+
+	const { isUpdateRoundPending, updateRound } = useUpdateRound()
 
 	//timer update time +1 sec every 1 sec setInterval
 	useEffect(() => {
 		let interval: NodeJS.Timeout | null = null
+
+		//console.log('activeRound', activeRound)
 
 		if (isRunning) {
 			interval = setInterval(() => {
@@ -37,14 +37,14 @@ export function useTimer(): ITimerState {
 			//stop timer after round is ended
 			setIsRunning(false)
 
-			//set current round to completed
-			// const timerState = useTimer()
-			// const { isLoading, sessionsResponse, workInterval } =
-			// 	useTodaySession(timerState)
-			//
-			// const rounds = sessionsResponse?.data.rounds
-			// const actions = useTimerActions({ ...timerState, rounds })
-			// actions.nextRoundHandler()
+			//go to next round if prev round ended
+			updateRound({
+				id: activeRound?.id,
+				data: {
+					isCompleted: true,
+					totalSeconds: workInterval * 60
+				}
+			})
 
 			//show notification if round is ended
 			if (Notification.permission === "granted") {
@@ -57,8 +57,6 @@ export function useTimer(): ITimerState {
 				})
 			}
 		}
-
-
 
 		return () => {
 			if (interval) clearInterval(interval)

@@ -21,6 +21,8 @@ export function ListView() {
 					<div>Due date</div>
 					<div>Priority</div>
 					<div></div>
+					<div>Time</div>
+					<div></div>
 				</div>
 
 				<div className={styles.parentsWrapper}>
