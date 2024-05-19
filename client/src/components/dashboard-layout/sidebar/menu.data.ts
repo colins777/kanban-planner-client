@@ -12,6 +12,11 @@ import type { IMenuItem } from './menu.interface'
 
 export const MENU: IMenuItem[] = [
 	{
+		icon: Timer,
+		link: DASHBOARD_PAGES.TIMER,
+		name: 'Timer'
+	},
+	{
 		icon: LayoutDashboard,
 		link: DASHBOARD_PAGES.HOME,
 		name: 'Dashboard'
@@ -20,11 +25,6 @@ export const MENU: IMenuItem[] = [
 		icon: KanbanSquare,
 		link: DASHBOARD_PAGES.TASKS,
 		name: 'Tasks'
-	},
-	{
-		icon: Timer,
-		link: DASHBOARD_PAGES.TIMER,
-		name: 'Timer'
 	},
 	{
 		icon: CalendarRange,

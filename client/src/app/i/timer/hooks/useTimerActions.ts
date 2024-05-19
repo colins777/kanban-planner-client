@@ -13,7 +13,8 @@ export function useTimerActions({
 	setIsRunning,
 	secondsLeft,
 	rounds,
-	setActiveRound
+	setActiveRound,
+	setSecondsLeft
 }: TypeUseTimerActions) {
 
 	const { workInterval } = useLoadSettings()
@@ -39,6 +40,10 @@ export function useTimerActions({
 
 	const nextRoundHandler = () => {
 		if (!activeRound?.id) return
+
+		setIsRunning(false);
+		//round completed
+		setSecondsLeft(secondsLeft => 0)
 
 		updateRound({
 			id: activeRound?.id,

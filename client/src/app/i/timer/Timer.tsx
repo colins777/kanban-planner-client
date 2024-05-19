@@ -1,26 +1,45 @@
 'use client'
 
 import { Loader, Pause, Play, RefreshCcw } from 'lucide-react'
-
 import { Button } from '@/components/ui/buttons/Button'
 
 import { formatTime } from './format-time'
 import { useCreateSession } from './hooks/useCreateSession'
 import { useDeleteSession } from './hooks/useDeleteSession'
-import { useTimer } from './hooks/useTimer'
 import { useTimerActions } from './hooks/useTimerActions'
 import { useTodaySession } from './hooks/useTodaySession'
+
 import { TimerRounds } from './rounds/TimerRounds'
+import {GlobalStateContext} from "../../../hooks/useGlobalContext";
+import {useContext, useState} from "react";
 
 export function Timer() {
-	const timerState = useTimer()
+
+	//const timerState = useTimer()
+
+	const {
+        secondsLeft,
+		activeRound,
+        setActiveRound,
+        setIsRunning,
+        setSecondsLeft,
+        isRunning
+	} = useContext(GlobalStateContext)
+
+	const timerState = {
+        secondsLeft,
+		activeRound,
+        setActiveRound,
+        setIsRunning,
+        setSecondsLeft,
+        isRunning
+	}
+
 	const { isLoading, sessionsResponse, workInterval } =
 		useTodaySession(timerState)
 
 	const rounds = sessionsResponse?.data.rounds
 	const actions = useTimerActions({ ...timerState, rounds })
-
-	console.log('Timer actions', actions)
 
 	const { isPending, mutate } = useCreateSession()
 	const { deleteSession, isDeletePending } = useDeleteSession(() =>
