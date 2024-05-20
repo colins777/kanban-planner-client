@@ -116,6 +116,25 @@ export function ListRow({ item, setItems }: IListRow) {
 					{isDeletePending ? <Loader size={15} /> : <Trash size={15} />}
 				</button>
 			</div>
+
+			<div className={cn(
+				styles.timeSpentBlock
+			)}>
+				<div className='grid grid-cols-2  w-full'>
+					<div>0:17 - 0:18</div>
+					<div>1 min</div>
+				</div>
+
+				<div className='grid grid-cols-2  w-full'>
+					<div>0:20 - 0:25</div>
+					<div>5 min</div>
+				</div>
+
+				<div className='grid grid-cols-2  w-full'>
+					<div>16:00 - 17:00</div>
+					<div>1 hour</div>
+				</div>
+			</div>
 		</div>
 	)
 }

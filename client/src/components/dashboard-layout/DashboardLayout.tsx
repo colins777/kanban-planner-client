@@ -4,6 +4,8 @@
 //@TODO 7 set active menu +++
 
 //@TODO 1 add timer to each task for tracking time
+	//add drop down with time sessions for each task
+
 //@TODO 2 use pomodoro lap duration while tracking time is running
 //@TODO 3 set on/of for using pomodoro lap in tasks
 //@TODO 4 add ring sound after pomodoro timer end

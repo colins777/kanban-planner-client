@@ -60,4 +60,10 @@
 			}
 		}
 	}
+	.timeSpentBlock {
+		@apply flex flex-col;
+	}
+	.timeSpentRow {
+		//@apply font-normal grid grid-cols-[100fr_100fr_];
+	}
 }
