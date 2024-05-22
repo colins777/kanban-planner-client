@@ -67,20 +67,23 @@ export function ListRow({ item, setItems }: IListRow) {
 		setIsRunning(false)
 
 		const currentTimeBlockId = currentTimeSpentBlock.id
+		//const {id} = currentTimeSpentBlock
 
 		console.log('triggerEndTime')
-		console.log('currentTimeSpentBlock', currentTimeSpentBlock)
+		console.log('task ID: ', item.id)
 
-
-		const dataEndTime = {
+		const dataModifyTimeEnd = {
 			taskId: item.id,
-			startTime : new Date(),
-			endTime : '2024-05-22 10:28:28.99',
+			startTime : currentTimeSpentBlock.startTime,
+			endTime : new Date().toISOString(),
 			isCompleted: null,
-			additionalData : null
+			additionalData : ''
 		}
 
-		endTimeTask(currentTimeBlockId, dataEndTime)
+		console.log('endTimeTask dataEndTime', dataModifyTimeEnd)
+
+		//endTimeTask(currentTimeBlockId, dataEndTime)
+        endTimeTask({id: currentTimeBlockId, data: dataModifyTimeEnd });
 
 	}
 

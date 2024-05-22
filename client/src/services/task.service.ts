@@ -1,6 +1,7 @@
 import type { ITaskResponse, TypeTaskFormState } from '@/types/task.types'
 
 import { axiosWithAuth } from '@/api/interceptors'
+import {ITimeTaskSpentResponse} from "../types/time-task-spent.types";
 
 class TaskService {
     private BASE_URL = '/user/tasks'
@@ -34,22 +35,11 @@ class TaskService {
         return response
     }
 
-    async endTimeTask(id: string, data) {
+    async endTimeTask(id: string, data:ITimeTaskSpentResponse) {
 
-        const data1 = {
-            taskId: item.id,
-            startTime : new Date(),
-            endTime : '2024-05-22 10:28:28.99',
-            isCompleted: null,
-            additionalData : null
-        }
+        //console.log('time block id', id)
+       // console.log('time block data', data)
 
-        const id1 = 'clwhol9ac0014n6cg2k7wq1zu'
-
-        console.log('time block id', id)
-        console.log('time block data', data)
-
-       // const response = await axiosWithAuth.put(`${this.BASE_URL_TASK_TIME}/${id1}`, data1)
         const response = await axiosWithAuth.put(`${this.BASE_URL_TASK_TIME}/${id}`, data)
 
         return response
