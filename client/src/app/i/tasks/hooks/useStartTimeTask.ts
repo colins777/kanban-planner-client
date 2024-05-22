@@ -4,10 +4,9 @@ import {taskService} from "../../../../services/task.service";
 
 
 export function useStartTimeTask() {
-	const queryClient = useQueryClient()
 
-	//const { startTimeTask,  isLoading, isError, isSuccess, data, error } = useMutation({
-	const { mutate: startTimeTask } = useMutation({
+	const queryClient = useQueryClient()
+	const { mutate: startTimeTask,  isLoading, isError, isSuccess, data, error } = useMutation({
 		mutationKey: ['start time task'],
 		mutationFn: (data) => taskService.startTimeTask(data),
 		onSuccess() {
@@ -17,12 +16,18 @@ export function useStartTimeTask() {
 		}
 	})
 
+	const [currentTimeSpentBlock, setCurrentTimeSpentBlock] = useState()
 
-	//return {
-		//startTimeTask,  isLoading, isError, isSuccess, data, error
+	useEffect(() => {
 
-	//}
+		console.log('data', data)
 
-	return startTimeTask
+		setCurrentTimeSpentBlock(data?.data)
+	}, [data?.data])
+
+
+	return { startTimeTask, currentTimeSpentBlock, setCurrentTimeSpentBlock, isLoading, isError, isSuccess, data, error }
+
+	//return startTimeTask
 
 }

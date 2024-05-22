@@ -30,10 +30,29 @@ class TaskService {
     //task timer
     async startTimeTask(id: string) {
         const response = await axiosWithAuth.post(this.BASE_URL_TASK_TIME, id)
+
+        return response
     }
 
     async endTimeTask(id: string, data) {
+
+        const data1 = {
+            taskId: item.id,
+            startTime : new Date(),
+            endTime : '2024-05-22 10:28:28.99',
+            isCompleted: null,
+            additionalData : null
+        }
+
+        const id1 = 'clwhol9ac0014n6cg2k7wq1zu'
+
+        console.log('time block id', id)
+        console.log('time block data', data)
+
+       // const response = await axiosWithAuth.put(`${this.BASE_URL_TASK_TIME}/${id1}`, data1)
         const response = await axiosWithAuth.put(`${this.BASE_URL_TASK_TIME}/${id}`, data)
+
+        return response
     }
 }
 

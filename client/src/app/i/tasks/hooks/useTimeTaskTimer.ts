@@ -3,9 +3,10 @@ import {useStartTimeTask} from "./useStartTimeTask";
 import {useEndTimeTask} from "./useEndTimeTask";
 
 export function useTimeTaskTimer() {
-	//const queryClient = useQueryClient()
-	const startTimeTask = useStartTimeTask();
-	const endTimeTask = useEndTimeTask()
+
+	const { startTimeTask, currentTimeSpentBlock, setCurrentTimeSpentBlock, isLoading: isLoadingStart } = useStartTimeTask();
+	//const endTimeTask = useEndTimeTask()
+	const { mutate: endTimeTask} = useEndTimeTask();
 
 	const [isRunning, setIsRunning] = useState(false)
 	const [secondsLeft, setSecondsLeft] = useState(0)
@@ -29,10 +30,10 @@ export function useTimeTaskTimer() {
 		}
 	}, [isRunning, secondsLeft])
 
-
-
 	return {
 		startTimeTask,
+		currentTimeSpentBlock,
+		setCurrentTimeSpentBlock,
 		endTimeTask,
 		secondsLeft,
 		setIsRunning,

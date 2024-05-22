@@ -2,21 +2,21 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useEffect, useState } from 'react'
 import {taskService} from "../../../../services/task.service";
 
-
 export function useEndTimeTask() {
 	const queryClient = useQueryClient()
 
-	const { mutate: endTimeTask } = useMutation({
-		mutationKey: ['start time task'],
-		mutationFn: (data) => taskService.endTimeTask(data),
+	const mutation = useMutation({
+		mutationKey: ['end time task'],
+		//mutationFn: ({id, data}: {id, data}) => taskService.endTimeTask(id, data),
+		mutationFn: (id, data) => taskService.endTimeTask(id, data),
 		onSuccess() {
 			queryClient.invalidateQueries({
-				//queryKey: ['tasks']
+				queryKey: ['tasks']
 			})
 		}
 	})
 
 
-	return endTimeTask
+	return mutation
 
 }

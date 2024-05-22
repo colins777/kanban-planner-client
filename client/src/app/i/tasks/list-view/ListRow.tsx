@@ -33,22 +33,22 @@ export function ListRow({ item, setItems }: IListRow) {
 
 	const {
 		startTimeTask,
+		currentTimeSpentBlock,
+		setCurrentTimeSpentBlock,
 		endTimeTask,
 		secondsLeft,
 		setIsRunning,
 		setSecondsLeft,
 		isRunning,
-		data
 	} = useTimeTaskTimer();
+
+
+	//console.log('currentTimeSpentBlock', currentTimeSpentBlock)
 
 	function triggerStartTime() {
 
+		console.log('triggerStartTime currentTimeSpentBlock', currentTimeSpentBlock)
 
-		console.log('triggerStartTime item.id', item.id)
-
-		//console.log('secondsLeft', secondsLeft)
-
-		//setIsRunning((state) => !isRunning)
 		setIsRunning(true)
 
 		const data = {
@@ -64,15 +64,15 @@ export function ListRow({ item, setItems }: IListRow) {
 	}
 
 	function triggerEndTime() {
-
-
-
-
 		setIsRunning(false)
 
-		console.log('triggerEndTime item.id')
+		const currentTimeBlockId = currentTimeSpentBlock.id
 
-		const data = {
+		console.log('triggerEndTime')
+		console.log('currentTimeSpentBlock', currentTimeSpentBlock)
+
+
+		const dataEndTime = {
 			taskId: item.id,
 			startTime : new Date(),
 			endTime : '2024-05-22 10:28:28.99',
@@ -80,10 +80,9 @@ export function ListRow({ item, setItems }: IListRow) {
 			additionalData : null
 		}
 
-		endTimeTask('clwhol9ac0014n6cg2k7wq1zu', data)
+		endTimeTask(currentTimeBlockId, dataEndTime)
 
 	}
-
 
 	useTaskDebounce({ watch, itemId: item.id })
 
