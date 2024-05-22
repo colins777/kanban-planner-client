@@ -14,6 +14,7 @@ import { useDeleteTask } from '../hooks/useDeleteTask'
 import { useTaskDebounce } from '../hooks/useTaskDebounce'
 
 import styles from './ListView.module.scss'
+import {useTimeTaskTimer} from "../hooks/useTimeTaskTimer";
 
 interface IListRow {
 	item: ITaskResponse
@@ -29,6 +30,60 @@ export function ListRow({ item, setItems }: IListRow) {
 			priority: item.priority
 		}
 	})
+
+	const {
+		startTimeTask,
+		endTimeTask,
+		secondsLeft,
+		setIsRunning,
+		setSecondsLeft,
+		isRunning,
+		data
+	} = useTimeTaskTimer();
+
+	function triggerStartTime() {
+
+
+		console.log('triggerStartTime item.id', item.id)
+
+		//console.log('secondsLeft', secondsLeft)
+
+		//setIsRunning((state) => !isRunning)
+		setIsRunning(true)
+
+		const data = {
+			taskId: item.id,
+			startTime : new Date(),
+			endTime : new Date(),
+			isCompleted: null,
+			additionalData : null
+		}
+
+		//@ts-ignore
+		startTimeTask(data)
+	}
+
+	function triggerEndTime() {
+
+
+
+
+		setIsRunning(false)
+
+		console.log('triggerEndTime item.id')
+
+		const data = {
+			taskId: item.id,
+			startTime : new Date(),
+			endTime : '2024-05-22 10:28:28.99',
+			isCompleted: null,
+			additionalData : null
+		}
+
+		endTimeTask('clwhol9ac0014n6cg2k7wq1zu', data)
+
+	}
+
 
 	useTaskDebounce({ watch, itemId: item.id })
 
@@ -97,14 +152,16 @@ export function ListRow({ item, setItems }: IListRow) {
 			<div className='capitalize'>
 				<button
 					className='mt-2 opacity-80 hover:opacity-100 transition-opacity'
+					onClick={!isRunning ? () => triggerStartTime() : () => triggerEndTime()}
 				>
-					{/*{timerState.isRunning ? <Pause size={30} /> : <Play size={30} />}*/}
-					<Play size={20} />
+					{isRunning ? <Pause size={20} /> : <Play size={20} />}
 				</button>
 			</div>
 
 
-			<div className='capitalize'>1.6 H</div>
+			<div className='capitalize'>
+				1.6 H
+			</div>
 
 			<div>
 				<button

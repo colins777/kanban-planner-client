@@ -4,6 +4,7 @@ import { axiosWithAuth } from '@/api/interceptors'
 
 class TaskService {
     private BASE_URL = '/user/tasks'
+    private BASE_URL_TASK_TIME = '/user/tasks-spent-time'
 
     async getTasks() {
         const response = await axiosWithAuth.get<ITaskResponse[]>(this.BASE_URL)
@@ -24,6 +25,15 @@ class TaskService {
         const response = await axiosWithAuth.delete(`${this.BASE_URL}/${id}`)
 
         return response
+    }
+
+    //task timer
+    async startTimeTask(id: string) {
+        const response = await axiosWithAuth.post(this.BASE_URL_TASK_TIME, id)
+    }
+
+    async endTimeTask(id: string, data) {
+        const response = await axiosWithAuth.put(`${this.BASE_URL_TASK_TIME}/${id}`, data)
     }
 }
 
