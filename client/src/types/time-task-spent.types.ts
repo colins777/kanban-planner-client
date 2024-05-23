@@ -8,6 +8,7 @@ export interface ITimeTaskSpentResponse extends IBase {
     taskId: string
     startTime: string
     endTime: string,
+    totalTime?: number,
     isCompleted?: boolean,
     additionalData? : string
 }

@@ -76,6 +76,7 @@ export function ListRow({ item, setItems }: IListRow) {
 			taskId: item.id,
 			startTime : currentTimeSpentBlock.startTime,
 			endTime : new Date().toISOString(),
+			totalTime: 1111,
 			isCompleted: null,
 			additionalData : ''
 		}

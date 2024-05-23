@@ -1,8 +1,6 @@
 //@TODO state managment Next.js
 //https://blog.logrocket.com/guide-state-management-next-js/
 
-//@TODO 7 set active menu +++
-
 //@TODO 1 add timer to each task for tracking time
 	//add drop down with time sessions for each task
 
@@ -12,6 +10,8 @@
 //@TODO 5 add push notification after pomodoro timer end
 //@TODO 6 separate Settings blocks
 //@TODO 8 fix sorting in Time planning page
+
+//@TODO 9 add total time in seconds for each task time spent block
 
 
 import type { PropsWithChildren } from 'react'
