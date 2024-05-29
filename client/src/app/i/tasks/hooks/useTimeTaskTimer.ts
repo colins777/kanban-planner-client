@@ -5,7 +5,6 @@ import {useEndTimeTask} from "./useEndTimeTask";
 export function useTimeTaskTimer() {
 
 	const { startTimeTask, currentTimeSpentBlock, setCurrentTimeSpentBlock, isLoading: isLoadingStart } = useStartTimeTask();
-	//const endTimeTask = useEndTimeTask()
 	const {endTimeTask} = useEndTimeTask();
 
 	const [isRunning, setIsRunning] = useState(false)

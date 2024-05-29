@@ -1,17 +1,16 @@
 //@TODO state managment Next.js
 //https://blog.logrocket.com/guide-state-management-next-js/
 
-//@TODO 1 add timer to each task for tracking time
-	//add drop down with time sessions for each task
+//@TODO 1 use pomodoro lap duration while tracking time is running
+//@TODO 2 set on/of for using pomodoro lap in tasks
+//@TODO 3 add ring sound after pomodoro timer end
+//@TODO 4 add push notification after pomodoro timer end
+//@TODO 5 separate Settings blocks
+//@TODO 6 fix sorting in Time planning page
 
-//@TODO 2 use pomodoro lap duration while tracking time is running
-//@TODO 3 set on/of for using pomodoro lap in tasks
-//@TODO 4 add ring sound after pomodoro timer end
-//@TODO 5 add push notification after pomodoro timer end
-//@TODO 6 separate Settings blocks
-//@TODO 8 fix sorting in Time planning page
-
-//@TODO 9 add total time in seconds for each task time spent block
+//@TODO 7 create method for counting total time of each task
+//@TODO 8 create new column total_time in sec for each task
+	//update task total time after each click on pause btn
 
 
 import type { PropsWithChildren } from 'react'

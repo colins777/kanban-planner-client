@@ -65,6 +65,7 @@ export function ListRow({ item, setItems }: IListRow) {
 
 	function triggerEndTime() {
 		setIsRunning(false)
+		setSecondsLeft(0)
 
 		const currentTimeBlockId = currentTimeSpentBlock.id
 		//const {id} = currentTimeSpentBlock
@@ -76,7 +77,7 @@ export function ListRow({ item, setItems }: IListRow) {
 			taskId: item.id,
 			startTime : currentTimeSpentBlock.startTime,
 			endTime : new Date().toISOString(),
-			totalTime: 1111,
+			totalTime: secondsLeft,
 			isCompleted: null,
 			additionalData : ''
 		}
