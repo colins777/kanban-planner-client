@@ -10,7 +10,6 @@ export function useEndTimeTask() {
 		mutationKey: ['_end time task'],
 
 		mutationFn: ( {id, data}: { id: string; data: ITimeTaskSpentResponse }) => {
-		//mutationFn: ({ id, data}) => {
 			console.log('ID: ', id)
 			console.log('DATA: ', data)
 
@@ -27,11 +26,10 @@ export function useEndTimeTask() {
 
 		onSuccess() {
 			queryClient.invalidateQueries({
-				//queryKey: ['tasks']
+				queryKey: ['tasks']
 			})
 		}
 	})
-
 
 	return {endTimeTask, isLoading, isError, isSuccess, data, error }
 

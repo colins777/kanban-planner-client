@@ -12,6 +12,11 @@
 //@TODO 8 create new column total_time in sec for each task
 	//update task total time after each click on pause btn
 
+//@TODO 9 fix timer behaviour in case inactive tab.
+	//https://www.reddit.com/r/reactjs/comments/useyq8/setinterval_not_working_in_the_inactive_tab/
+	//https://isamatov.com/prevent-timers-stopping-javascript/
+	//https://stackoverflow.com/questions/72144609/my-timer-in-reactjs-is-not-working-correctly-with-a-delay
+
 
 import type { PropsWithChildren } from 'react'
 
