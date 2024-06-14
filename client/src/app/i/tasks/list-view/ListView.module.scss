@@ -66,4 +66,10 @@
 	.timeSpentRow {
 		//@apply font-normal grid grid-cols-[100fr_100fr_];
 	}
+	.rotate270 {
+		transform: rotate(270deg);
+	}
+	.rotate90 {
+		transform: rotate(90deg);
+	}
 }

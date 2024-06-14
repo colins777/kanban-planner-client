@@ -1,6 +1,7 @@
 'use client'
 
 import {useFormatDate} from "../../../../hooks/useFormatDate";
+import {useFormatSecondsToHours} from "../../../../hooks/useFormatSecondsToHours";
 
 
 // interface ISwitcherView {
@@ -17,7 +18,9 @@ export function TaskSpentTimeBlock({time}) {
         <>
             <div className='flex justify-between w-full'>
                 <div>{useFormatDate(time.startTime)} - {useFormatDate(time.endTime)}</div>
-                <div>{time.totalTime} s</div>
+                {/*<div>{time.totalTime} s</div>*/}
+
+                <div>{useFormatSecondsToHours(time.totalTime)}</div>
             </div>
 
             {/*<div className='grid grid-cols-2  w-full'>*/}

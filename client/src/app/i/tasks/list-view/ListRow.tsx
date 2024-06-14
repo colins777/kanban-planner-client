@@ -17,6 +17,7 @@ import styles from './ListView.module.scss'
 import {useTimeTaskTimer} from "../hooks/useTimeTaskTimer";
 import {TaskSpentTimeBlock} from "../task-spent-time/TaskSpentTimeBlock";
 import { LogOut } from 'lucide-react'
+import {useState} from "react";
 
 interface IListRow {
 	item: ITaskResponse
@@ -44,6 +45,8 @@ export function ListRow({ item, setItems }: IListRow) {
 		isRunning,
 	} = useTimeTaskTimer();
 
+	const [showSpentTimeBlock, setShowSpentTimeBlock] = useState(false)
+
 
 	//console.log('currentTimeSpentBlock', currentTimeSpentBlock)
 
@@ -70,10 +73,8 @@ export function ListRow({ item, setItems }: IListRow) {
 		//setSecondsLeft(0)
 
 		const currentTimeBlockId = currentTimeSpentBlock.id
-		//const {id} = currentTimeSpentBlock
-
-		console.log('triggerEndTime')
-		console.log('task ID: ', item.id)
+		//console.log('triggerEndTime')
+		//console.log('task ID: ', item.id)
 
 		const dataModifyTimeEnd = {
 			taskId: item.id,
@@ -89,6 +90,10 @@ export function ListRow({ item, setItems }: IListRow) {
 		//endTimeTask(currentTimeBlockId, dataEndTime)
         endTimeTask({id: currentTimeBlockId, data: dataModifyTimeEnd });
 
+	}
+
+	const triggerShowTimeBlock = function() {
+		setShowSpentTimeBlock(!showSpentTimeBlock)
 	}
 
 	useTaskDebounce({ watch, itemId: item.id })
@@ -167,14 +172,23 @@ export function ListRow({ item, setItems }: IListRow) {
 
 			<div className='capitalize'>
 				<span>1.6 H</span>
-				<div className='top-1 right-1'>
-					<button
-						className='opacity-20 hover:opacity-100 transition-opacity duration-300'
-						onClick={() => mutate()}
-					>
-						<LogOut size={20} />
-					</button>
-				</div>
+				{
+					item.timeSpentTasks.length &&
+
+					<div className='top-1 right-1 justify-center flex'>
+						<button
+							className={cn(
+								'opacity-20 hover:opacity-100 transition-opacity duration-300',
+								showSpentTimeBlock ? styles.rotate270 : styles.rotate90,
+								'animation-opacity'
+							)}
+							onClick={() => triggerShowTimeBlock()}
+						>
+							<LogOut size={20} />
+						</button>
+					</div>
+				}
+
 			</div>
 
 			<div>
@@ -188,14 +202,13 @@ export function ListRow({ item, setItems }: IListRow) {
 				</button>
 			</div>
 
+			{/*//Spent Time Block */}
 			<div className={cn(
 				styles.timeSpentBlock
 			)}>
 
-				{item.timeSpentTasks && item.timeSpentTasks.map((time, index) => (
-
+				{showSpentTimeBlock && item.timeSpentTasks && item.timeSpentTasks.map((time, index) => (
 						<TaskSpentTimeBlock key={index} time={time} />
-
 					)
 				)}
 
