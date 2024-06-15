@@ -12,7 +12,7 @@ import {useFormatSecondsToHours} from "../../../../hooks/useFormatSecondsToHours
 export function TaskSpentTimeBlock({time}) {
 
    // console.log('startTime', startTime)
-    console.log('startTime', time)
+    //console.log('startTime', time)
 
     return (
         <>

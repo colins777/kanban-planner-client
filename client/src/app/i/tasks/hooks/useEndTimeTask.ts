@@ -13,7 +13,8 @@ export function useEndTimeTask() {
 			console.log('ID: ', id)
 			console.log('DATA: ', data)
 
-			taskService.endTimeTask(id, data)
+			//This should return Promise for invalidateQueries!!!
+			return taskService.endTimeTask(id, data);
 
 			// taskService.endTimeTask('clwibfcpi000v135i1um58vov', {
 			// 	taskId: 'clwgsit8s0000n6cgirdefmwi',
@@ -24,12 +25,11 @@ export function useEndTimeTask() {
 			// })
 		},
 
-		onSuccess() {
+		onSuccess: () => {
 			queryClient.invalidateQueries({
-				//update tasks, get task URL
-				queryKey: ['tasks']
-			})
-		}
+				queryKey: ['tasks'],
+			});
+		},
 	})
 
 	return {endTimeTask, isLoading, isError, isSuccess, data, error }

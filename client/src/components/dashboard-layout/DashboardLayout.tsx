@@ -13,7 +13,6 @@
 	//https://isamatov.com/prevent-timers-stopping-javascript/
 	//https://stackoverflow.com/questions/72144609/my-timer-in-reactjs-is-not-working-correctly-with-a-delay
 
-//@TODO 8 fix update total time in task!!!! after clicking on pause btn
 
 
 import type { PropsWithChildren } from 'react'
