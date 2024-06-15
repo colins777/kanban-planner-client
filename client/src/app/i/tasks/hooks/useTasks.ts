@@ -6,7 +6,12 @@ import { taskService } from '@/services/task.service'
 export function useTasks() {
 	const { data } = useQuery({
 		queryKey: ['tasks'],
-		queryFn: () => taskService.getTasks()
+		queryFn: () => taskService.getTasks(),
+		//updating settings
+		// staleTime: 0,
+		// cacheTime: 0,
+		// refetchOnMount: true,
+		// refetchOnWindowFocus: true
 	})
 
 	const [items, setItems] = useState<ITaskResponse[] | undefined>(data?.data)

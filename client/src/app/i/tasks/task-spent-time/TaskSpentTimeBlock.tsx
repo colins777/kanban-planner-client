@@ -20,7 +20,7 @@ export function TaskSpentTimeBlock({time}) {
                 <div>{useFormatDate(time.startTime)} - {useFormatDate(time.endTime)}</div>
                 {/*<div>{time.totalTime} s</div>*/}
 
-                <div>{useFormatSecondsToHours(time.totalTime)}</div>
+                <div>{time.totalTime ? useFormatSecondsToHours(time.totalTime) : 0}</div>
             </div>
 
             {/*<div className='grid grid-cols-2  w-full'>*/}

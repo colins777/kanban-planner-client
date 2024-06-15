@@ -26,6 +26,7 @@ export function useEndTimeTask() {
 
 		onSuccess() {
 			queryClient.invalidateQueries({
+				//update tasks, get task URL
 				queryKey: ['tasks']
 			})
 		}

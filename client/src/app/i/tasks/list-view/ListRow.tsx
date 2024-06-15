@@ -18,6 +18,7 @@ import {useTimeTaskTimer} from "../hooks/useTimeTaskTimer";
 import {TaskSpentTimeBlock} from "../task-spent-time/TaskSpentTimeBlock";
 import { LogOut } from 'lucide-react'
 import {useState} from "react";
+import {useFormatSecondsToHours} from "../../../../hooks/useFormatSecondsToHours";
 
 interface IListRow {
 	item: ITaskResponse
@@ -48,11 +49,9 @@ export function ListRow({ item, setItems }: IListRow) {
 	const [showSpentTimeBlock, setShowSpentTimeBlock] = useState(false)
 
 
-	//console.log('currentTimeSpentBlock', currentTimeSpentBlock)
+	//console.log('item', item)
 
 	function triggerStartTime() {
-
-		console.log('triggerStartTime currentTimeSpentBlock', currentTimeSpentBlock)
 
 		setIsRunning(true)
 
@@ -171,9 +170,9 @@ export function ListRow({ item, setItems }: IListRow) {
 
 
 			<div className='capitalize'>
-				<span>1.6 H</span>
+				<span>{useFormatSecondsToHours(item.totalTime)}</span>
 				{
-					item.timeSpentTasks.length &&
+					item.timeSpentTasks?.length &&
 
 					<div className='top-1 right-1 justify-center flex'>
 						<button
