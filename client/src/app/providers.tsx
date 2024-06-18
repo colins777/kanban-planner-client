@@ -3,7 +3,8 @@
 import {QueryClient} from "@tanstack/query-core";
 import {QueryClientProvider} from "@tanstack/react-query";
 import {ReactQueryDevtools} from "@tanstack/react-query-devtools";
-import { PropsWithChildren, useState } from 'react';
+import {PropsWithChildren, useEffect, useState} from 'react';
+import * as serviceWorkerRegistration from "../serviceWorkerRegistration";
 
 export function Providers({children}:PropsWithChildren ) {
     const [client] = useState(
@@ -15,6 +16,14 @@ export function Providers({children}:PropsWithChildren ) {
             }
         })
     )
+
+    useEffect(() => {
+        // if (typeof window !== 'undefined') {
+
+        console.log('serviceWorkerRegistration.register')
+        serviceWorkerRegistration.register();
+        //  }
+    }, []);
 
     return (
         <QueryClientProvider client={client}>

@@ -6,7 +6,7 @@ const { parse, format, parseISO } = require('date-fns');
 //'2024-05-23 11:00:52.04';
 export function useFormatSecondsToHours (seconds:string):string {
 
-    if(seconds < 60) {
+    if(seconds < 60 && seconds > 0) {
         return ' ' + seconds + ' s'
     }
 

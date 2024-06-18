@@ -170,7 +170,7 @@ export function ListRow({ item, setItems }: IListRow) {
 
 
 			<div className='capitalize'>
-				<span>{useFormatSecondsToHours(item.totalTime)}</span>
+				<span>{useFormatSecondsToHours(item?.totalTime ? item.totalTime : '')}</span>
 				{
 					item.timeSpentTasks?.length &&
 

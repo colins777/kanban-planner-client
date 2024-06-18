@@ -10,7 +10,7 @@ export function useEndTimeTask() {
 		mutationKey: ['_end time task'],
 
 		mutationFn: ( {id, data}: { id: string; data: ITimeTaskSpentResponse }) => {
-			console.log('ID: ', id)
+			//console.log('ID: ', id)
 			console.log('DATA: ', data)
 
 			//This should return Promise for invalidateQueries!!!
@@ -27,6 +27,7 @@ export function useEndTimeTask() {
 
 		onSuccess: () => {
 			queryClient.invalidateQueries({
+				//this key gets from useTasks() hook!!!
 				queryKey: ['tasks'],
 			});
 		},
