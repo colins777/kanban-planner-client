@@ -1,18 +1,7 @@
 export function register(config) {
 
-
-
-    //window.addEventListener('load', () => {
-
-        console.log('tst!!!')
-
-        const swUrl = '/service-worker.js'
-
-
-        registerValidSW(swUrl, config);
-
-  //  });
-
+    const swUrl = '/service-worker.js'
+    registerValidSW(swUrl, config);
 }
 
 function registerValidSW(swUrl, config) {

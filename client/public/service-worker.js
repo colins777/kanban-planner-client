@@ -51,13 +51,13 @@ function stopTimer() {
 
     self.clients.matchAll().then(clients => {
 
-        secondsLeft++
+    secondsLeft++
 
-        //console.log('secondsLeft', secondsLeft)
+    //console.log('secondsLeft', secondsLeft)
 
-        clients.forEach(client => {
-            client.postMessage({ type: 'TIME_LEFT', _seconds });
-        });
+    clients.forEach(client => {
+        client.postMessage({type: 'TIME_LEFT', _seconds});
+    });
     });
 
 }
