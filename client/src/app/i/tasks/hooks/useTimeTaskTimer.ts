@@ -10,7 +10,9 @@ export function useTimeTaskTimer() {
 	const [isRunning, setIsRunning] = useState(false)
 	const [secondsLeft, setSecondsLeft] = useState(0)
 
-	useEffect(() => {
+	const [serviceWorkerReady, setServiceWorkerReady] = useState(false);
+
+	/*useEffect(() => {
 		let interval: NodeJS.Timeout | null = null
 
 		if (isRunning) {
@@ -27,7 +29,53 @@ export function useTimeTaskTimer() {
 		return () => {
 			if (interval) clearInterval(interval)
 		}
+	}, [isRunning, secondsLeft])*/
+
+	useEffect(() => {
+		if ('serviceWorker' in navigator) {
+			navigator.serviceWorker.ready.then(() => {
+				setServiceWorkerReady(true);
+			});
+		}
+	}, [serviceWorkerReady])
+
+	//Get data from service worker
+	useEffect(() => {
+
+		console.log('isRunning', isRunning)
+
+		if (isRunning) {
+			//startTimer()
+			//setServiceWorkerReady(true);
+
+			if ('serviceWorker' in navigator) {
+
+				navigator.serviceWorker.controller.postMessage({ type: 'START_TIMER' });
+
+				navigator.serviceWorker.addEventListener('message', event => {
+					if (event.data && event.data.type === 'TIME_LEFT') {
+
+						console.log('TICK!!!', event.data)
+						setSecondsLeft(event.data.secondsLeft)
+					}
+				});
+			}
+
+		} else {
+		//	setSecondsLeft(endTimer())
+			navigator.serviceWorker.controller.postMessage({ type: 'STOP_TIMER' });
+		}
+
 	}, [isRunning, secondsLeft])
+
+	// useEffect(() => {
+	//
+	// 		if (isRunning) {
+	// 			navigator.serviceWorker.controller.postMessage({ type: 'START_TIMER' });
+	// 		} else {
+	// 			navigator.serviceWorker.controller.postMessage({ type: 'STOP_TIMER' });
+	// 		}
+	// }, [isRunning]);
 
 	return {
 		startTimeTask,
