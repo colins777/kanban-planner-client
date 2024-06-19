@@ -1,6 +1,6 @@
 import cn from 'clsx'
 import {GripVertical, Loader, Pause, Play, Trash} from 'lucide-react'
-import type { Dispatch, SetStateAction } from 'react'
+import type {Dispatch, SetStateAction} from 'react'
 import { Controller, useForm } from 'react-hook-form'
 
 import Checkbox from '@/components/ui/checkbox'
@@ -17,7 +17,7 @@ import styles from './ListView.module.scss'
 import {useTimeTaskTimer} from "../hooks/useTimeTaskTimer";
 import {TaskSpentTimeBlock} from "../task-spent-time/TaskSpentTimeBlock";
 import { LogOut } from 'lucide-react'
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import {useFormatSecondsToHours} from "../../../../hooks/useFormatSecondsToHours";
 
 interface IListRow {
@@ -38,13 +38,16 @@ export function ListRow({ item, setItems }: IListRow) {
 	const {
 		startTimeTask,
 		currentTimeSpentBlock,
-		setCurrentTimeSpentBlock,
 		endTimeTask,
 		secondsLeft,
 		setIsRunning,
 		setSecondsLeft,
 		isRunning,
 	} = useTimeTaskTimer();
+
+	useEffect(() => {
+		setSecondsLeft(secondsLeft)
+	}, [secondsLeft])
 
 	const [showSpentTimeBlock, setShowSpentTimeBlock] = useState(false)
 
@@ -170,7 +173,15 @@ export function ListRow({ item, setItems }: IListRow) {
 
 
 			<div className='capitalize'>
-				<span>{useFormatSecondsToHours(item?.totalTime ? item.totalTime : '')}</span>
+				{/*Total time task*/}
+				{/*<span>{useFormatSecondsToHours(item?.totalTime ? item.totalTime : '')}</span>*/}
+
+				<span>
+					{useFormatSecondsToHours(isRunning
+														? (secondsLeft ? secondsLeft : '')
+														: item?.totalTime ? item.totalTime : '')}
+				</span>
+
 				{
 					item.timeSpentTasks?.length &&
 

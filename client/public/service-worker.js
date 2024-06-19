@@ -7,14 +7,6 @@ self.addEventListener('activate', event => {
     console.log('Service Worker activating.');
 });
 
-// self.addEventListener('message', event => {
-//     if (event.data && event.data.type === 'START_TIMER') {
-//         startTimer();
-//     } else if (event.data && event.data.type === 'STOP_TIMER') {
-//       //  stopTimer();
-//     }
-// });
-
 let timerInterval = null;
 let secondsLeft = 0;
 
@@ -61,7 +53,7 @@ function stopTimer() {
 
         secondsLeft++
 
-        console.log('secondsLeft', secondsLeft)
+        //console.log('secondsLeft', secondsLeft)
 
         clients.forEach(client => {
             client.postMessage({ type: 'TIME_LEFT', _seconds });

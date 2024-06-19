@@ -18,12 +18,16 @@ export function Providers({children}:PropsWithChildren ) {
     )
 
     useEffect(() => {
-        // if (typeof window !== 'undefined') {
 
-        console.log('serviceWorkerRegistration.register')
-        serviceWorkerRegistration.register();
-        //  }
+        //https://prnt.sc/eNB0sPBrPJUA
+        console.log('serviceWorker registered', navigator.serviceWorker)
+
+        //check if service worker exist
+        if(!('serviceWorker' in navigator)) {
+            serviceWorkerRegistration.register();
+        }
     }, []);
+    serviceWorkerRegistration.register();
 
     return (
         <QueryClientProvider client={client}>
