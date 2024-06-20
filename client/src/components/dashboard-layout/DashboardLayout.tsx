@@ -8,7 +8,7 @@
 //@TODO 5 separate Settings blocks
 //@TODO 6 fix sorting in Time planning page
 
-//@TODO 7 fix timer behaviour in case inactive tab.
+//@TODO 7 fix timer behaviour in case inactive tab. ++++
 	//https://www.reddit.com/r/reactjs/comments/useyq8/setinterval_not_working_in_the_inactive_tab/
 	//https://isamatov.com/prevent-timers-stopping-javascript/
 	//https://stackoverflow.com/questions/72144609/my-timer-in-reactjs-is-not-working-correctly-with-a-delay

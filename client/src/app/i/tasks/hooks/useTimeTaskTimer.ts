@@ -8,7 +8,6 @@ export function useTimeTaskTimer() {
 
 	const [isRunning, setIsRunning] = useState(false);
 	const [secondsLeft, setSecondsLeft] = useState(0);
-	const [serviceWorkerReady, setServiceWorkerReady] = useState(false);
 
 	useEffect(() => {
 		console.log('isRunning', isRunning);
@@ -44,7 +43,6 @@ export function useTimeTaskTimer() {
 			navigator.serviceWorker.addEventListener('message', handleServiceWorkerMessage);
 
 			navigator.serviceWorker.ready.then(registration => {
-				setServiceWorkerReady(true);
 				if (registration.active && navigator.serviceWorker.controller) {
 					// Ensure the controller is available before sending messages
 					if (isRunning) {

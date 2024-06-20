@@ -47,6 +47,14 @@ export function ListRow({ item, setItems }: IListRow) {
 
 	useEffect(() => {
 		setSecondsLeft(secondsLeft)
+
+		//@TODO TEST!!! add conditional for break time if user activated task_block_round (true || false)
+		// if (secondsLeft == 10 && currentTimeSpentBlock) {
+		//
+		// 		triggerEndTime()
+		// }
+
+
 	}, [secondsLeft])
 
 	const [showSpentTimeBlock, setShowSpentTimeBlock] = useState(false)

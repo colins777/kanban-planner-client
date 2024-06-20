@@ -20,7 +20,7 @@ export function useStartTimeTask() {
 
 	useEffect(() => {
 
-		console.log('data', data)
+		console.log('CurrentTimeSpentBlock data', data)
 
 		setCurrentTimeSpentBlock(data?.data)
 	}, [data?.data])
