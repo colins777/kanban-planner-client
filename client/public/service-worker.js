@@ -5,6 +5,8 @@ self.addEventListener('install', event => {
 
 self.addEventListener('activate', event => {
     console.log('Service Worker activating.');
+    //Claim clients immediately, this for fix error with navigator.serviceWorker.controller = null after first page loading
+    self.clients.claim();
 });
 
 let timerInterval = null;
@@ -51,13 +53,9 @@ function stopTimer() {
 
     self.clients.matchAll().then(clients => {
 
-    secondsLeft++
-
-    //console.log('secondsLeft', secondsLeft)
-
-    clients.forEach(client => {
-        client.postMessage({type: 'TIME_LEFT', _seconds});
-    });
+        clients.forEach(client => {
+            client.postMessage({type: 'TIME_LEFT', _seconds});
+        });
     });
 
 }

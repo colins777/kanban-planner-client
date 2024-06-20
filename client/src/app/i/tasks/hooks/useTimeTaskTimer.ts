@@ -1,75 +1,66 @@
-import { useEffect, useState } from 'react'
-import {useStartTimeTask} from "./useStartTimeTask";
-import {useEndTimeTask} from "./useEndTimeTask";
+import { useEffect, useState } from 'react';
+import { useStartTimeTask } from "./useStartTimeTask";
+import { useEndTimeTask } from "./useEndTimeTask";
 
 export function useTimeTaskTimer() {
-
 	const { startTimeTask, currentTimeSpentBlock, setCurrentTimeSpentBlock, isLoading: isLoadingStart } = useStartTimeTask();
-	const {endTimeTask} = useEndTimeTask();
+	const { endTimeTask } = useEndTimeTask();
 
-	const [isRunning, setIsRunning] = useState(false)
-	const [secondsLeft, setSecondsLeft] = useState(0)
-
+	const [isRunning, setIsRunning] = useState(false);
+	const [secondsLeft, setSecondsLeft] = useState(0);
 	const [serviceWorkerReady, setServiceWorkerReady] = useState(false);
 
-	/*useEffect(() => {
-		let interval: NodeJS.Timeout | null = null
+	useEffect(() => {
+		console.log('isRunning', isRunning);
 
-		if (isRunning) {
-			interval = setInterval(() => {
-				setSecondsLeft(secondsLeft => secondsLeft + 1)
-
-				console.log('secondsLeft', secondsLeft)
-
-			}, 1000)
-		} else if (!isRunning && secondsLeft !== 0 && interval) {
-			clearInterval(interval)
-		}
-
-		return () => {
-			if (interval) clearInterval(interval)
-		}
-	}, [isRunning, secondsLeft])*/
-
-/*	useEffect(() => {
-		console.log('navigator.serviceWorker', 'serviceWorker' in navigator)
-
-
-		if ('serviceWorker' in navigator) {
-			navigator.serviceWorker.ready.then(() => {
-				setServiceWorkerReady(true)
+		if (isRunning && 'serviceWorker' in navigator) {
+			navigator.serviceWorker.addEventListener('message', event => {
+				if (event.data && event.data.type === 'TIME_LEFT') {
+					//console.log('TICK!!!', event.data);
+					setSecondsLeft(event.data.secondsLeft);
+				}
 			});
 		}
-	}, [serviceWorkerReady])*/
+	}, [isRunning]);
 
-	//Get data from service worker
 	useEffect(() => {
-
-		console.log('isRunning', isRunning)
-
-		//if (serviceWorkerReady) {
-			if (isRunning) {
-				if ('serviceWorker' in navigator) {
-
-					console.log('navigator.serviceWorker.controller', navigator.serviceWorker.controller)
-
-					navigator.serviceWorker.controller.postMessage({ type: 'START_TIMER' });
-
-					navigator.serviceWorker.addEventListener('message', event => {
-						if (event.data && event.data.type === 'TIME_LEFT') {
-
-							console.log('TICK!!!', event.data)
-							setSecondsLeft(event.data.secondsLeft)
-						}
-					});
+		const handleServiceWorkerMessage = event => {
+			if (event.data) {
+				switch (event.data.type) {
+					case 'TIME_LEFT':
+						console.log('TIME_LEFT', event.data.secondsLeft);
+						setSecondsLeft(event.data.secondsLeft);
+						break;
+					case 'ELAPSED_TIME':
+						// Handle other message types if needed
+						break;
+					default:
+						break;
 				}
-			} else {
-				//	setSecondsLeft(endTimer())
-				navigator.serviceWorker.controller?.postMessage({ type: 'STOP_TIMER' });
 			}
-	//	}
+		};
 
-	}, [isRunning, secondsLeft])
+		if ('serviceWorker' in navigator) {
+			navigator.serviceWorker.addEventListener('message', handleServiceWorkerMessage);
+
+			navigator.serviceWorker.ready.then(registration => {
+				setServiceWorkerReady(true);
+				if (registration.active && navigator.serviceWorker.controller) {
+					// Ensure the controller is available before sending messages
+					if (isRunning) {
+						navigator.serviceWorker.controller.postMessage({ type: 'START_TIMER' });
+					} else {
+						navigator.serviceWorker.controller.postMessage({ type: 'STOP_TIMER' });
+					}
+				}
+			});
+
+			// Clean up the event listener on component unmount
+			return () => {
+				navigator.serviceWorker.removeEventListener('message', handleServiceWorkerMessage);
+			};
+		}
+	}, [isRunning]);
 
 	return {
 		startTimeTask,
@@ -80,5 +71,5 @@ export function useTimeTaskTimer() {
 		setIsRunning,
 		setSecondsLeft,
 		isRunning
-	}
+	};
 }
