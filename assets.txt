@@ -1,4 +1,4 @@
-Time - https://youtu.be/-7K_0NRLCu4?t=4911
+Time - https://youtu.be/-7K_0NRLCu4?t=6403  5:05:58
 
 
 
@@ -6,6 +6,8 @@ Libs
 1.Nest.js for server
 
 Start server - npm start dev
+
+Start client - npm run dev
 
 Npm packages:
 - @nestjs/passport - encode passwords
@@ -22,5 +24,63 @@ prisma init  - for init prisma
 Install PostgreSQL on Windows 10
 https://www.youtube.com/watch?v=0n41UTkOBb0
 
+*********************************************************************
 Prisma commands
 update DB columns (rewrite all atables data) - prisma db push
+
+***********postgresql***********
+pass: root
+********************************
+
+For login
+{
+    "email" : "colins@gmail.com",
+    "password" : "123456"
+}
+
+Dependicies Client
+1 npm i @dnd-kit/sortable
+2 npm i @dnd-kit/core
+3 npm i @dnd-kit/utilities
+
+//dragNdrop
+4 npm i @hello-pangea/dnd
+
+//async state manager
+5 npm i @tanstack/react-query
+6 npm i @tanstack/react-query-devtools
+7 npm i axios
+
+//A tiny (239B) utility for constructing className strings conditionally.
+8 npm i clsx
+
+//minimalist JavaScript library that parses, validates, manipulates, and displays dates and times
+9 npm i dayjs
+10 npm i js-cookie
+
+//for delay send data to server
+11 npm i lodash.debounce
+
+//icons lib
+12 npm i lucide-react
+
+13 npm i react-day-picker
+
+//form validation
+14 npm i react-hook-form
+
+//info modals
+15 npm i sonner
+
+16 npm i tailwind-variants
+
+17 npm i @trivago/prettier-plugin-sort-imports
+
+18 npm i @types/js-cookie
+
+19 npm i @types/lodash.debounce
+
+20 npm i prettier
+
+21 npm i sass
+

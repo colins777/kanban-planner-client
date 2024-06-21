@@ -19,6 +19,8 @@ import {TaskSpentTimeBlock} from "../task-spent-time/TaskSpentTimeBlock";
 import { LogOut } from 'lucide-react'
 import {useState, useEffect} from "react";
 import {useFormatSecondsToHours} from "../../../../hooks/useFormatSecondsToHours";
+import {useContext} from "react";
+import GlobalStateContext from "../../../../hooks/useGlobalContext";
 
 interface IListRow {
 	item: ITaskResponse
@@ -35,6 +37,14 @@ export function ListRow({ item, setItems }: IListRow) {
 		}
 	})
 
+
+	const {userProfile} = useContext(GlobalStateContext);
+	//true || false
+	const {taskBlockRound} = userProfile.data.user;
+	const {workInterval} = userProfile.data.user;
+
+	//console.log('user data', userProfile.data.user)
+
 	const {
 		startTimeTask,
 		currentTimeSpentBlock,
@@ -49,11 +59,10 @@ export function ListRow({ item, setItems }: IListRow) {
 		setSecondsLeft(secondsLeft)
 
 		//@TODO TEST!!! add conditional for break time if user activated task_block_round (true || false)
-		// if (secondsLeft == 10 && currentTimeSpentBlock) {
-		//
-		// 		triggerEndTime()
-		// }
-
+		//workInterval in DB - minutes
+		if (secondsLeft == workInterval * 60 && taskBlockRound && currentTimeSpentBlock) {
+				triggerEndTime()
+		}
 
 	}, [secondsLeft])
 
