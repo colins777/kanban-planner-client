@@ -21,6 +21,7 @@ import {useState, useEffect} from "react";
 import {useFormatSecondsToHours} from "../../../../hooks/useFormatSecondsToHours";
 import {useContext} from "react";
 import GlobalStateContext from "../../../../hooks/useGlobalContext";
+import {TIME_IS_OUT_AUDIO_PATH} from "../../../../constants/path.constants";
 
 interface IListRow {
 	item: ITaskResponse
@@ -58,10 +59,32 @@ export function ListRow({ item, setItems }: IListRow) {
 	useEffect(() => {
 		setSecondsLeft(secondsLeft)
 
-		//@TODO TEST!!! add conditional for break time if user activated task_block_round (true || false)
 		//workInterval in DB - minutes
 		if (secondsLeft == workInterval * 60 && taskBlockRound && currentTimeSpentBlock) {
+		//if (secondsLeft == workInterval && taskBlockRound && currentTimeSpentBlock) {
 				triggerEndTime()
+
+				function playSound() {
+
+				const audio = new Audio(TIME_IS_OUT_AUDIO_PATH);
+				audio.play()
+					.catch(error => console.error('Error playing audio:', error));
+			}
+
+			if (Notification.permission === "granted") {
+				playSound()
+				new Notification("Time to break!")
+
+			} else {
+				console.log('No permission')
+
+				Notification.requestPermission().then(permission => {
+					if (permission === "granted") {
+						playSound()
+						new Notification("Time to break!")
+					}
+				})
+			}
 		}
 
 	}, [secondsLeft])

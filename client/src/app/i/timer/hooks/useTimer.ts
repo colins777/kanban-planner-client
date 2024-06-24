@@ -16,6 +16,7 @@ export function useTimer(): ITimerState {
 
 	const { isUpdateRoundPending, updateRound } = useUpdateRound()
 
+	//@TODO need to use timer from service-worker!!!!
 	//timer update time +1 sec every 1 sec setInterval
 	useEffect(() => {
 		let interval: NodeJS.Timeout | null = null

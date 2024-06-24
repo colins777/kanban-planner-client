@@ -3,7 +3,9 @@
 
 //@TODO 1 use pomodoro lap duration while tracking time is running
 //@TODO 2 set on/of for using pomodoro lap in tasks
-//@TODO 3 add ring sound after pomodoro timer end
+
+//@TODO 3 add ring sound after pomodoro timer end ++++
+
 //@TODO 4 add push notification after pomodoro timer end
 //@TODO 5 separate Settings blocks
 //@TODO 6 fix sorting in Time planning page
@@ -12,7 +14,9 @@
 	//https://www.reddit.com/r/reactjs/comments/useyq8/setinterval_not_working_in_the_inactive_tab/
 	//https://isamatov.com/prevent-timers-stopping-javascript/
 	//https://stackoverflow.com/questions/72144609/my-timer-in-reactjs-is-not-working-correctly-with-a-delay
+//@TODO 7 add deleted method fot task time rounds, delete all roundes if task deleted
 
+//@TODO 8 search f-ty for tasks
 
 
 import type { PropsWithChildren } from 'react'
